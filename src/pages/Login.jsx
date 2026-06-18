@@ -58,7 +58,16 @@ function Login({ onLoginSuccess }) {
         toast.dismiss(loadingToast)
         toast.success('Login Berhasil! Selamat Datang.')
 
-        localStorage.setItem('token', result.token)
+      const extractedToken = result.token || result.data?.token || result.Token || result.data?.Token
+
+        if (!extractedToken) {
+          console.error("Struktur JSON response tidak dikenali:", result)
+          toast.error("Gagal membaca session token dari server.")
+          return
+        }
+
+        // Simpan token yang tervalidasi ada isinya
+        localStorage.setItem('token', extractedToken)
         if (onLoginSuccess) onLoginSuccess()
         
         setTimeout(() => {
