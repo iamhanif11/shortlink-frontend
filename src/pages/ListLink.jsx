@@ -195,7 +195,6 @@ function ListLinks() {
                       />
                     </svg>
 
-
                     <a
                       href={
                         link.slug

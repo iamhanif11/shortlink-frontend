@@ -6,7 +6,7 @@ import Joi from 'joi'
 import toast from 'react-hot-toast'
 import Button from '../components/atoms/Button'
 
-// 1. Definisi Skema Validasi Joi
+
 const shortLinkSchema = Joi.object({
   url: Joi.string()
     .uri({ scheme: ['http', 'https'] })
@@ -29,10 +29,10 @@ function CreateShortLink() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Mengambil URL lemparan dari Landing Page jika ada
+
   const initialUrl = location.state?.urlFromLanding || ''
 
-  // 2. Inisialisasi React Hook Form dengan Default Values
+  
   const {
     register,
     handleSubmit,
@@ -48,17 +48,17 @@ function CreateShortLink() {
     },
   })
 
-  // Memantau input slug secara real-time untuk kebutuhan Live Preview
+  
   const watchSlug = watch('slug', '')
 
-  // 3. Fungsi Handler Submit - Menggunakan Async-Await Standar untuk toast.promise
+  
   const onCreateLinkSubmit = async (data) => {
     setIsLoading(true)
 
     const createLinkRequest = async () => {
       const token = localStorage.getItem('token')
       
-      // Jika token tidak sengaja terhapus atau bernilai undefined string
+      
       if (!token || token === 'undefined') {
         throw new Error('Sesi Anda telah berakhir. Silakan login kembali.')
       }
@@ -67,7 +67,7 @@ function CreateShortLink() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Spasi dipastikan aman
+          'Authorization': `Bearer ${token}`, 
         },
         body: JSON.stringify({
      original_url: data.url, 
@@ -107,7 +107,7 @@ function CreateShortLink() {
     <div className="w-full min-h-screen bg-[#f8fafc] font-sans text-gray-800 px-4 py-10 flex flex-col items-center">
       <div className="w-full max-w-[760px] mx-auto">
         
-        {/* Tombol Back to Dashboard */}
+        
         <button 
           onClick={() => navigate('/list-link')}
           className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors mb-6 cursor-pointer"
@@ -118,17 +118,17 @@ function CreateShortLink() {
           Back to Dashboard
         </button>
 
-        {/* Judul & Deskripsi */}
+        
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Create New Short Link</h1>
           <p className="text-sm text-gray-500 mt-1">Transform your long URLs into clean, manageable assets.</p>
         </div>
 
-        {/* KARTU PUTIH FORM */}
+        
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 sm:p-10 mb-12">
           <form onSubmit={handleSubmit(onCreateLinkSubmit)} className="space-y-6">
             
-            {/* 1. INPUT DESTINATION URL (Menggunakan elemen <input> bawaan HTML untuk tes langsung jika atom bermasalah) */}
+            
             <div className="space-y-2">
               <label htmlFor="url" className="block text-xs font-bold text-gray-700 uppercase tracking-wide">
                 Destination URL <span className="text-red-500">*</span>
@@ -154,7 +154,7 @@ function CreateShortLink() {
               )}
             </div>
 
-            {/* 2. INPUT CUSTOM SLUG */}
+            
             <div className="space-y-2">
               <label htmlFor="slug" className="block text-xs font-bold text-gray-700 uppercase tracking-wide">
                 Custom Slug (Optional)
@@ -182,7 +182,7 @@ function CreateShortLink() {
               )}
             </div>
 
-            {/* 3. BLUE LIVE PREVIEW BOX */}
+            
             <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-blue-600 mt-0.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -196,7 +196,7 @@ function CreateShortLink() {
               </div>
             </div>
 
-            {/* 4. ACTIONS BUTTONS */}
+            
             <div className="flex items-center gap-6 pt-2">
               <Button
                 type="submit"
