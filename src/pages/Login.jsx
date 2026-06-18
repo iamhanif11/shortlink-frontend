@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import Joi from 'joi'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import InputField from '../components/atoms/Input'
 import Button from '../components/atoms/Button'
 
@@ -78,7 +78,6 @@ function Login({ onLoginSuccess }) {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#f8fafc] text-black font-sans">
-      <Toaster position="top-center" reverseOrder={false} />
 
       <div className="flex flex-col items-center justify-center px-4 pt-12 pb-6 w-full md:max-w-md mx-auto">
         <h1 className="text-4xl font-extrabold tracking-tight mb-8 text-black">
